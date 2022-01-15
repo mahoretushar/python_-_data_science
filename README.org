@@ -2,4 +2,4 @@
 #+AUTHOR: Prof. T. R. Mahore
 
 * Introduction
-This repo contains all the course contents used during the live classes of Python and Data Science. The course is designed in such a way that one can gain knowledge of Pyhton Programming along with it's use cases in various fields such as developing Desktop Applications, Web Applications and use in Data Science Field.
+This repo contains all the course contents used during the live classes of Python and Data Science. The course is designed in such a way that one can gain knowledge of Python Programming along with it's use cases in various fields such as developing Desktop Applications, Web Applications and use in Data Science Field.

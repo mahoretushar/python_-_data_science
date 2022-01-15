@@ -1,0 +1,112 @@
+#+TITLE: Practice Problem Set 1
+#+SUBTITLE: Exercise on Strings - Level 1
+
+* Problem Statement 1
+** Description:
+Write a Python program that prints the length of a string ~s~.
+
+** Expected Output:
+| Input     | Output |
+|-----------+--------|
+| ""        |      0 |
+| "H"       |      1 |
+| "hello"   |      5 |
+| "Amazing" |      7 |
+
+* Problem Statement 2
+** Description:
++ Write a Python program that prints the character at index ~i~ in the string ~s~.
++ If the index is out of range, the program should print ~"i is out of range"~
++ If the string is empty, the program should print ~"Empty String"~
+
+** Expected Output:
+| String  |  i | Output              |
+|---------+----+---------------------|
+| "Hello" |  2 | "l"                 |
+| "Pizza" |  4 | "a"                 |
+| ""      |  3 | "Empty String"      |
+| "World" | 15 | "i is out of range" |
+
+* Problem Statement 3
+** Description:
++ Write a Python Program that prints the reversed version of a string.
++ The program must preserve uppercase and lowercase letters.
++ If the string is empty, print it intact.
+
+** Expected Output:
+| Input   | Output  |
+|---------+---------|
+| "Hello" | "olleH" |
+| "Wo"    | "oW"    |
+| ""      | ""      |
+
+* Problem Statement 4
+** Description:
++ Write a Python program that prints the first and last three characters of the string ~s~ as a single string.
++ If the string has less than six characters, print an empty string (blank output).
+
+** Expected Output:
+| Input       | Output   |
+|-------------+----------|
+| "Blue"      | ""       |
+| "Wonderful" | "Wonful" |
+| "Amazing"   | "Amaing" |
+
+* Problem Statement 5
+** Description:
++ Write a Python program that prints the string ~s~ without the characters located at even indices.
++ If the string is empty or only has one character, print it intact.
+** Expected Output:
+| Input    | Output |
+|----------+--------|
+| "Coding" | "oig"  |
+| "Pizza"  | "iz"   |
+| "Python" | "yhn"  |
+| "A"      | "A"    |
+| ""       | ""     |
+
+* Problem Statement 6
+** Description:
++ Write a Python program that check if a string only contains numbers.
++ If it does, print ~True~. Else, print ~False~.
+
+** Expected Output:
+| String    | Output |
+|-----------+--------|
+| "Hello"   | False  |
+| "4567"    | True   |
+| "Hello59" | False  |
+| ""        | False  |
+
+** Hints:
++ The ~.isdigit()~ method returns True if all the characters in the string are digits.
+
+* Problem Statement 7
+** Description:
++ Write a Python program that prints the string s without the character at index n.
++ If the index n is out of range, print the string s intact.
++ If the string s is empty, print the string s intact.
+
+** Expected Output:
+| String  |  n | Output |
+|---------+----+--------|
+| "Hello" |  1 | "Hllo" |
+| "World" |  3 | "Word" |
+| "Dog"   | 15 | "Dog"  |
+| ""      |  2 | ""     |
+
+* Problem Statement 8
+** Description:
++ Write a Python program that prints the string s with the character ~curr_char~ replaced by the character ~new_char~.
++ ~curr_char~ and ~new_char~ are variables that contain strings with a single character.
++ You may assume that ~new_char~ will not be an empty string.
++ The match must be case-sensitive (do not replace lowercase letters if ~curr_char~ is uppercase).
++ If no match is found, print the initial string.
+
+** Expected Output:
+| String   | ~curr_char~ | ~new_char~ | Output   |
+|----------+-----------+----------+----------|
+| "Hello"  | "l"       | "s"      | "Hesso"  |
+| "World"  | "W"       | "A"      | "Aorld"  |
+| "Pyhton" | "P"       | "x"      | "xython" |
+| "Pyhton" | "p"       | "a"      | "Python" |
