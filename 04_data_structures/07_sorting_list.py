@@ -12,6 +12,9 @@ items = [
 ]
 
 
-def sort_items(item):
-    return item[1]
+def sort_items(items):
+    return items[1]
 
+
+items.sort(key=sort_items)
+print(items)
