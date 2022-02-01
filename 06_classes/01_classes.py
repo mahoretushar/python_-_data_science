@@ -10,6 +10,7 @@
 
 x = 1
 print(type(x))
+y = [1, 2, 3, 4]
 
 # class: blueprint for creating new objects
 # object: It's an Instance of a class
