@@ -26,4 +26,3 @@ class FileStream(Stream):
 class NetworkStream(Stream):
     def read(self):
         print("Reading data from network")
-
