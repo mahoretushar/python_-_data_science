@@ -84,7 +84,8 @@ def caps_2(event):
 
 # ====ClearPrint=====#
 def clear_print(event):
-    pass
+    d_name.set("")
+    d_enrol_no.set("")
 
 
 # ======Convert Date=====#
@@ -108,6 +109,10 @@ def create_fun():
         "NULL, caste VARCHAR NOT NULL, place_of_birth VARCHAR NOT NULL, dob DATE NOT NULL, "
         "date_w NOT NULL, month VARCHAR NOT NULL, year VARCHAR NOT NULL, last_institute VARCHAR NOT NULL, "
         "date_of_admission DATE NOT NULL, course_name VARCHAR  NOT NULL)")
+    c.execute(
+        "CREATE TABLE IF NOT EXISTS STU_TC ( tc_no INTEGER NOT NULL CONSTRAINT STU_TC PRIMARY KEY AUTOINCREMENT, "
+        "progress VARCHAR NOT NULL, conduct VARCHAR NOT NULL, dol DATE NOT NULL, reason VARCHAR NOT NULL, remark "
+        "VARCHAR NOT NULL, register_no VARCHAR NOT NULL UNIQUE REFERENCES STU_DB)")
     con.commit()
     c.close()
 
@@ -127,11 +132,32 @@ def fetch_data():
 
 
 def get_name():
-    pass
+    rn = register_no_2.get()
+    certificate.r_no(rn)
+    con = sqlite3.connect('studb')
+    c = con.cursor()
+    x = register_no_2.get()
+    c.execute("SELECT name FROM STU_DB WHERE register_no=?", [x])
+    d_f_name = c.fetchone()
+    c.execute("SELECT mname FROM STU_DB WHERE register_no=?", [x])
+    d_m_name = c.fetchone()
+    c.execute("SELECT lname FROM STU_DB WHERE register_no=?", [x])
+    d_l_name = c.fetchone()
+    c.execute("SELECT enrolment_no FROM STU_DB WHERE register_no=?", [x])
+    d_enrolment_no = c.fetchone()
+    display_name.insert(END, f'{d_f_name[0]} {d_m_name[0]} {d_l_name[0]}')
+    display_enroll.insert(END, d_enrolment_no[0])
+    con.commit()
+    con.close()
 
 
 def save_leaving_info():
-    pass
+    con = sqlite3.connect('studb')
+    c = con.cursor()
+    c.execute("INSERT INTO STU_TC (progress, conduct, dol, reason, remark, register_no) VALUES(?, ?, ?, ?, ?, ?)",
+              (p_progress.get(), p_conduct.get(), p_dol.get(), p_reason.get(), p_remark.get(), register_no_2.get()))
+    con.commit()
+    c.close()
 
 
 def add_fun():
@@ -154,7 +180,24 @@ def add_fun():
 
 
 def get_cursor(event):
-    pass
+    cursor_row = stu_table.focus()
+    content = stu_table.item(cursor_row)
+    row = content['values']
+    register_no.set(row[0])
+    enrolment_no.set(row[1])
+    name.set(row[2])
+    mname.set(row[3])
+    lname.set(row[4])
+    mother_name.set(row[5])
+    caste.set(row[6])
+    place_of_birth.set(row[7])
+    dob.set(row[8])
+    date_w.set(row[9])
+    month.set(row[10])
+    year.set(row[11])
+    last_institute.set(row[12])
+    date_of_admission.set(row[13])
+    course_name.set(row[14])
 
 
 def clear():
@@ -324,6 +367,69 @@ course_ent.grid(row=14, column=1, padx=2, pady=2)
 course_ent.bind("<KeyRelease>", caps)
 # == Data Entry Close == #
 
+# ====PrintTC=====#
+# Register No.
+register_no_p_lbl = tk.Label(print_frame, text="Enter Register No.", font=("Ariel", 10), bg="lightgrey")
+register_no_p_lbl.grid(row=0, column=0, padx=2, pady=2)
+register_no_p_ent = tk.Entry(print_frame, width=30, bd=5, font=("Ariel", 10), textvariable=register_no_2)
+register_no_p_ent.grid(row=0, column=1, padx=2, pady=2)
+register_no_p_ent.bind("<FocusIn>", clear_print)
+
+# Printing Info
+display_frame = tk.Frame(print_frame, bg="white", bd=5, relief=tk.GROOVE)
+display_frame = tk.LabelFrame(print_frame, font=("Ariel", 16), text="Student Info", border=5,
+                              relief=tk.GROOVE,
+                              bg="white")
+display_frame.place(x=0, y=80, width=480, height=100)
+
+display_name_lbl = tk.Label(display_frame, text="Name", bg="white", font=("Ariel", 10))
+display_name_lbl.grid(row=1, column=0, padx=2, pady=2)
+display_name = tk.Entry(display_frame, width=45, bd=5, font=("Ariel", 10), textvariable=d_name)
+display_name.grid(row=1, column=1, padx=2, pady=2)
+
+display_enrolment_lbl = tk.Label(display_frame, text="Enrollment No.", bg="white", font=("Ariel", 10))
+display_enrolment_lbl.grid(row=2, column=0, padx=2, pady=2)
+display_enroll = tk.Entry(display_frame, width=45, bd=5, font=("Ariel", 10), textvariable=d_enrol_no)
+display_enroll.grid(row=2, column=1, padx=2, pady=2)
+
+display_frame_2 = tk.Frame(print_frame, bg="white", bd=5, relief=tk.GROOVE)
+display_frame_2 = tk.LabelFrame(print_frame, font=("Ariel", 16), text="Enter Leaving Information", border=5,
+                                relief=tk.GROOVE,
+                                bg="white")
+display_frame_2.place(x=0, y=180, width=480, height=200)
+
+progress_lbl = tk.Label(display_frame_2, text="Progress", bg="white", font=("Ariel", 10))
+progress_lbl.grid(row=0, column=0, padx=2, pady=2)
+progress_ent = tk.Entry(display_frame_2, width=45, bd=5, font=("Ariel", 10), textvariable=p_progress)
+progress_ent.grid(row=0, column=1, padx=2, pady=2)
+progress_ent.bind("<KeyRelease>", caps_2)
+
+conduct_lbl = tk.Label(display_frame_2, text="Conduct", bg="white", font=("Ariel", 10))
+conduct_lbl.grid(row=1, column=0, padx=2, pady=2)
+conduct_ent = tk.Entry(display_frame_2, width=45, bd=5, font=("Ariel", 10), textvariable=p_conduct)
+conduct_ent.grid(row=1, column=1, padx=2, pady=2)
+conduct_ent.bind("<KeyRelease>", caps_2)
+
+date_of_leaving_lbl = tk.Label(display_frame_2, text="Date of Leaving", font=("Ariel", 10), bg="white")
+date_of_leaving_lbl.grid(row=2, column=0, padx=2, pady=2)
+date_of_leaving_ent = DateEntry(display_frame_2, width=44, background='blue', date_pattern='dd/mm/yyyy',
+                                foreground='white', borderwidth=5, font=("Ariel", 10), textvariable=p_dol)
+date_of_leaving_ent.grid(row=2, column=1, padx=2, pady=2)
+date_of_leaving_ent.bind("<FocusOut>", date_conv_2)
+
+reason_lbl = tk.Label(display_frame_2, text="Reason", bg="white", font=("Ariel", 10))
+reason_lbl.grid(row=3, column=0, padx=2, pady=2)
+reason_ent = tk.Entry(display_frame_2, width=45, bd=5, font=("Ariel", 10), textvariable=p_reason)
+reason_ent.grid(row=3, column=1, padx=2, pady=2)
+reason_ent.bind("<KeyRelease>", caps_2)
+
+remark_lbl = tk.Label(display_frame_2, text="Remark", bg="white", font=("Ariel", 10))
+remark_lbl.grid(row=4, column=0, padx=2, pady=2)
+remark_ent = tk.Entry(display_frame_2, width=45, bd=5, font=("Ariel", 10), textvariable=p_remark)
+remark_ent.grid(row=4, column=1, padx=2, pady=2)
+remark_ent.bind("<KeyRelease>", caps_2)
+# ================= #
+
 
 # ==== Buttons ==== #
 
@@ -346,6 +452,43 @@ delete_btn.grid(row=1, column=0, padx=8, pady=5)
 clear_btn = tk.Button(btn_frame, bg="lightgrey", text="Clear", bd=5, font=("Ariel", 12), width=13, command=clear)
 clear_btn.grid(row=1, column=1, padx=8, pady=5)
 
+# ==== Search Frame ==== #
+
+search_frame = tk.Frame(data_frame, bg="white", bd=10, relief=tk.GROOVE)
+search_frame.pack(side=tk.TOP, fill=tk.X)
+
+search_lbl = tk.Label(search_frame, text="Enter Register No.", bg="lightgrey", font=("Ariel", 12))
+search_lbl.grid(row=0, column=0, padx=12, pady=12)
+search_in = tk.Entry(search_frame, width=20, bd=5, font=("Ariel", 12), textvariable=search_by)
+
+search_in.grid(row=0, column=1, padx=12, pady=12)
+
+search_btn = tk.Button(search_frame, text="Search", font=("Ariel", 12), bd=10, width=12, bg="lightgrey",
+                       command=search_data)
+search_btn.grid(row=0, column=2, padx=12, pady=12)
+
+showall_btn = tk.Button(search_frame, text="Show All", font=("Ariel", 12), bd=10, width=12, bg="lightgrey",
+                        command=fetch_data)
+showall_btn.grid(row=0, column=3, padx=12, pady=12)
+
+# ===================== #
+
+# ====Print Frame=====#
+
+get_btn = tk.Button(print_frame, text="Get Data", font=("Ariel", 10), bd=10, width=12, bg="lightgrey", command=get_name)
+get_btn.grid(row=0, column=3, padx=12, pady=12)
+
+btn_frame_2 = tk.Frame(print_frame, bg="white", bd=10, relief=tk.GROOVE)
+btn_frame_2.place(x=30, y=390, width=410, height=100)
+
+get_btn = tk.Button(btn_frame_2, text="Generate TC", font=("Ariel", 12), bd=10, width=16, bg="lightgrey",
+                    command=certificate.create_pdf)
+get_btn.grid(row=0, column=1, padx=12, pady=12)
+
+get_btn = tk.Button(btn_frame_2, text="Save Info", font=("Ariel", 12), bd=10, width=16, bg="lightgrey",
+                    command=save_leaving_info)
+get_btn.grid(row=0, column=0, padx=12, pady=12)
+
 # ================= #
 
 
@@ -358,9 +501,10 @@ y_scroll = tk.Scrollbar(db_frame, orient=tk.VERTICAL)
 x_scroll = tk.Scrollbar(db_frame, orient=tk.HORIZONTAL)
 
 stu_table = ttk.Treeview(db_frame, columns=(
-"Register No.", "Enrolment No.", "First Name", "Middle Name", "Last Name", "Mother's Name", "Caste", "Place of Birth",
-"Date of Birth", "Date", "Month", "Year", "Last Institute", "Date of Admission",
-"Course Name"),
+    "Register No.", "Enrolment No.", "First Name", "Middle Name", "Last Name", "Mother's Name", "Caste",
+    "Place of Birth",
+    "Date of Birth", "Date", "Month", "Year", "Last Institute", "Date of Admission",
+    "Course Name"),
                          yscrollcommand=y_scroll.set, xscrollcommand=x_scroll.set)
 
 y_scroll.config(command=stu_table.yview)
@@ -407,4 +551,6 @@ stu_table.pack(fill=tk.BOTH, expand=TRUE)
 
 create_fun()
 fetch_data()
+stu_table.bind("<ButtonRelease-1>", get_cursor)
+
 win.mainloop()
