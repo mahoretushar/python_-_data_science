@@ -1,3 +1,6 @@
+# In almost every program there are times we need to make decisions and that's when we use 'if' statement
+# Following is an example
+
 smartphone_price = 26000
 
 if smartphone_price < 25000:
