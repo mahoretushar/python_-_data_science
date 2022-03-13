@@ -5,3 +5,4 @@ def save_user(**user):
 
 
 save_user(id=1, name="Bruce", age="40")
+save_user(id=1, name="Bruce", age="42")

@@ -8,6 +8,7 @@
 # print(first, second, third)
 
 numbers = [1, 2, 3, 4, 5, 6, 7, 7, 50]
+# Packing and Unpacking
 # first, second, *others = numbers
 # print(first, second)
 # print(others)
@@ -16,4 +17,9 @@ numbers = [1, 2, 3, 4, 5, 6, 7, 7, 50]
 print(last_2, last_1)
 print(others)
 
+*others, last_2, last_1 = numbers
+print(last_2, last_1)
+print(others)
+
+# If we want only last two elements of the list
 # print(numbers[len(numbers)-2:])

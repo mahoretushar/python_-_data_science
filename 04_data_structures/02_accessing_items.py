@@ -5,7 +5,9 @@
 # #
 # alphabets[0] = 1  # replacing
 # print(alphabets)
-#
+
+
+# Slicing the contents in the list
 # print(alphabets[0:3])
 # print(alphabets[:3])
 # print(alphabets[0:])

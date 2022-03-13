@@ -6,6 +6,13 @@ print(alphabets)
 zeros = [0] * 10
 print(zeros)
 
+zeros = ['a'] * 10
+print(zeros)
+
+# concatenate two lists
+zeros = [0] * 5
+combined = zeros + alphabets
+
 numbers = list(range(20))
 print(numbers)
 
