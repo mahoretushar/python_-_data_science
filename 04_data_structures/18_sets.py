@@ -1,3 +1,4 @@
+# sets collection with no duplicates
 numbers = [1, 1, 2, 3, 4]
 uniques = set(numbers)
 another_set = set("Hello")
