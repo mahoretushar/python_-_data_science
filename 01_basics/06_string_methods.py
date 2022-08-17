@@ -13,5 +13,5 @@ course_name = "      python Programming      "
 # print(course_name.count("g"))
 # print(course_name.isdigit())
 
-new_string = "1,2,3"
-print(new_string.split(",", maxsplit=1))
+# new_string = "1,2,3"
+# print(new_string.split(",", maxsplit=1))

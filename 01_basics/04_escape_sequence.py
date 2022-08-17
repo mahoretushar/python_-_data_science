@@ -2,6 +2,9 @@
 # \'
 # \\
 # \n
+# \t
+# \ooo
+# \xhh
 
 course_name = "Python \"Programming\""
 
